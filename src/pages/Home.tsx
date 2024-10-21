@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar";
 function Home(){
     return (
         <div className="bg-violet-400">
-            <Navbar/>
+            <Navbar page="home"/>
         </div>
     )
 }
