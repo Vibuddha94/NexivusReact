@@ -8,23 +8,29 @@ import CreateOrder from './pages/order/CreateOrder'
 import Stock from './pages/stock'
 import User from './pages/user'
 import Login from './pages/auth/Login'
+import { AuthProvider } from './context/AuthContext'
+import ProtectedRoute from './components/ProtectedRoute'
 
 function App() {
-  
+
   return (
-    <BrowserRouter>
-    <Routes>
-      <Route path='/' element={<Home/>}/>
-      <Route path='/category' element={<Category/>}/>
-      <Route path='/product' element={<Product/>}/>
-      <Route path='/order' element={<OrderHome/>}/>
-      <Route path='/order/orders' element={<Orders/>}/>
-      <Route path='/order/createorder' element={<CreateOrder/>}/>
-      <Route path='/stock' element={<Stock/>}/>
-      <Route path='/user' element={<User/>}/>
-      <Route path='/auth/login' element={<Login/>}/>
-    </Routes>
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+        <Route element={<ProtectedRoute />}>
+          <Route path='/' element={<Home />} />
+          <Route path='/category' element={<Category />} />
+          <Route path='/product' element={<Product />} />
+          <Route path='/order' element={<OrderHome />} />
+          <Route path='/order/orders' element={<Orders />} />
+          <Route path='/order/createorder' element={<CreateOrder />} />
+          <Route path='/stock' element={<Stock />} />
+          <Route path='/user' element={<User />} />
+          </Route>
+          <Route path='/auth/login' element={<Login />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   )
 }
 
