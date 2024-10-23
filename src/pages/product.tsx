@@ -117,6 +117,11 @@ function Product() {
         }
     }
 
+    function handlePrice(e: any) {
+        setProductPrice(e.target.value);
+        setError("");
+    }
+
     function getEditProduct(product: ProductType) {
         setEditingProduct(product);
         setProductName(product.name);
@@ -125,18 +130,20 @@ function Product() {
         setCategoryId(product.category.id);
     }
 
+    //(e) => { setProductPrice(parseFloat(e.target.value)); setError(""); }
+
     return (
         <div>
             <div className="sticky top-0"><Navbar page="product" /></div>
-            <div className="bg-gradient-to-r from-green-200 to-blue-400 h-screen h-auto">
+            <div className="">
                 <div className="grid grid-cols-1 pe-4 ">
-                    <div className="sticky top-20  w-full md:mt-10 bg-slate-300 border-2 border-purple-800 md:m-auto m-2 md:mx-2 p-2 md:px-10 rounded-lg text-center h-auto">
+                    <div className="sticky top-20  w-full md:mt-10 bg-white border-2 border-purple-800 md:m-auto m-2 md:mx-2 p-2 md:px-10 rounded-lg text-center h-auto">
                         {editingProduct ? (<h2 className=" md:my-5 text-lg border-4 border-lime-400 rounded-md text-violet-800 font-bold">Edit Product</h2>) : (<h2 className=" md:my-5 text-lg border-4 border-lime-400 rounded-md text-violet-800 font-bold">Add Product</h2>)}
                         <div className="md:flex gap-3 pb-5">
                             <form className="w-full mx-auto md:flex gap-2 md:mt-0 ">
                                 <input type="text" onChange={(e) => { setProductName(e.target.value); setError(""); }} value={productName} className="bg-white w-full mt-2 md:mt-0 rounded-lg text-sm p-2 ring-2 " placeholder="Enter Product Name" />
                                 <input type="text" onChange={(e) => { setProductDescription(e.target.value); setError(""); }} value={productDescription} className="bg-white w-full mt-2 md:mt-0 rounded-lg text-sm p-2 ring-2 " placeholder="Enter Product Description" />
-                                <input type="text" onChange={(e) => { setProductPrice(parseInt(e.target.value)); setError(""); }} value={productPrice} className="bg-white w-full mt-2 md:mt-0 rounded-lg text-sm p-2 ring-2 " placeholder="Enter Price" />
+                                <input type="text" onChange={handlePrice} value={productPrice} className="bg-white w-full mt-2 md:mt-0 rounded-lg text-sm p-2 ring-2 " placeholder="Enter Price" />
                                 <select className="bg-white w-full mt-2 md:mt-0 rounded-lg text-sm p-2 ring-2" onChange={(e) => { setCategoryId(parseInt(e.target.value)); setError(""); }} value={categoryId}>
                                     
                                     {productName === "" ? (<option value="">Select Category</option>):(<option value={0}>Select Category</option>)}
@@ -155,13 +162,13 @@ function Product() {
                         </div>
                         <div className="text-sm text-red-600">{error}</div>
                     </div>
-                    <div className="w-full  bg-slate-300 border-2 border-purple-800  m-2 md:mx-2 p-2 md:px-10 rounded-lg text-center">
+                    <div className="w-full  bg-white border-2 border-purple-800  m-2 md:mx-2 p-2 md:pb-10 md:px-10 rounded-lg text-center">
                         <h2 className=" md:my-5 text-lg border-4 border-lime-400 rounded-md text-violet-800 font-bold">Products</h2>
                         <div className="md:flex gap-3 ">
                             <div className=" w-full overflow-x-auto shadow-md sm:rounded-lg">
-                                <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 rounded-xl">
                                     <thead className="text-xs  text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                        <tr>
+                                        <tr className="border-2 border-violet-600">
                                             <th scope="col" className="px-6 py-3">
                                                 Product Name
                                             </th>
@@ -172,7 +179,7 @@ function Product() {
                                                 Category
                                             </th>
                                             <th scope="col" className="px-6 py-3">
-                                                Price
+                                                Price (rs/=)
                                             </th>
                                             <th scope="col" className="px-6 py-3 text-center w-48">
                                                 Action
@@ -180,24 +187,23 @@ function Product() {
                                         </tr>
                                     </thead>
                                     <tbody>
-
                                         {products.map(function (product) {
-                                            return (<tr className="bg-gray-900 border-2 border-white">
-                                                <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            return (<tr className="bg-white border-2 border-violet-600 rounded-lg">
+                                                <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  border-2 border-violet-600">
                                                     {product.name}
                                                 </td>
-                                                <td className="px-6 py-4">
+                                                <td className="px-6 py-4 border-2 border-violet-600">
                                                     {product.description}
                                                 </td>
-                                                <td className="px-6 py-4">
+                                                <td className="px-6 py-4 border-2 border-violet-600">
                                                     {product.category.name}
                                                 </td>
-                                                <td className="px-6 py-4">
+                                                <td className="px-6 py-4 border-2 border-violet-600">
                                                     {product.price}
                                                 </td>
-                                                <td className="pe-4 py-4 text-right">
-                                                    <button type="button" onClick={() => getEditProduct(product)} className="w-20 md:me-1 py-1 bg-gradient-to-r from-green-800 to-lime-300 md:mt-0 mt-2 rounded-xl border-2 border-yellow-400 text-white font-semibold hover:bg-gradient-to-l from-lime-300 to-green-800 hover:border-black">Edit</button>
-                                                    <button type="button" onClick={() => deleteProduct(product.id)} className="w-20 py-1 bg-gradient-to-r from-red-800 to-pink-500 md:mt-0 mt-2 rounded-xl border-2 border-yellow-400 text-white font-semibold hover:bg-gradient-to-l from-pink-500 to-red-800 hover:border-black">Delete</button>
+                                                <td className="pe-4 py-4 text-right border-2 border-violet-600">
+                                                    <button type="button" onClick={() => getEditProduct(product)} className="w-20 md:me-1 py-1 bg-gradient-to-r from-green-300 via-green-500 to-green-700 hover:bg-gradient-to-br md:mt-0 mt-2 rounded-xl border-2 border-yellow-400 text-white font-semibold hover:border-black">Edit</button>
+                                                    <button type="button" onClick={() => deleteProduct(product.id)} className="w-20 py-1 bg-gradient-to-r from-red-800 to-pink-500 md:mt-0 mt-2 rounded-xl border-2 border-yellow-400 text-white font-semibold hover:bg-gradient-to-l  hover:border-black">Delete</button>
                                                 </td>
                                             </tr>)
                                         })}
