@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 import { useAuth } from "../../context/AuthContext";
 import ProductType from "../../types/ProductType";
-import axios from "axios";
+import axios, { Axios } from "axios";
 import StockType from "../../types/StockType";
 import CartType from "../../types/CartType";
 import StockDtoType from "../../types/StockDtoType";
 
 function CreateOrder() {
     const { isAuthenticated, jwtToken } = useAuth();
+
     const [products, setProducts] = useState<ProductType[]>([]);
     const [stocks, setStocks] = useState<StockType[]>([]);
     const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
@@ -32,7 +33,7 @@ function CreateOrder() {
             getProducts();
             getStocks();
         }
-    }, [isAuthenticated])
+    }, [isAuthenticated,cartList])
 
     async function getProducts() {
         try {
@@ -50,6 +51,38 @@ function CreateOrder() {
         } catch (error) {
             console.log(error);
         }
+    }
+
+    async function getFromStock() {
+        const data = stockDtos
+        try {
+            const resonse = await axios.put("http://localhost:8085/stock/getfrom", data, config);
+            console.log(resonse.data);
+            setStockDtos([]);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async function placeOrder(){
+        const data = {
+            itemIds : order
+        }
+        try {
+            const resonse = await axios.post("http://localhost:8085/orders", data, config);
+            console.log(resonse.data);
+            setOrder([]);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    function submitOrder(){
+        getFromStock();
+        placeOrder();
+        setCartList([]);
+        setIsCartOpen(false);
+        getStocks();
     }
 
 
@@ -82,9 +115,22 @@ function CreateOrder() {
             stockDtos.push(stockDto);
         }
         
-
         setQty(0);
         setProductId(0);
+    }
+
+    function remove(cart: CartType) {
+        order.splice(order.indexOf(cart.itemId), cart.qty);
+        cartList.splice(cartList.indexOf(cart), 1);
+
+        const stockDto : StockDtoType = {
+            id : cart.stockId,
+            qty: cart.qty,
+        }
+
+        stockDtos.splice(stockDtos.indexOf(stockDto), 1);
+
+        setTotalPrice(totalPrice - cart.price);
     }
 
     return (
@@ -190,7 +236,7 @@ function CreateOrder() {
                                             <label className=" text-left font-bold pl-4">{cart.name}</label>
                                             <label className=" text-left font-bold pl-4">{cart.description}</label>
                                             <div className="text-right pe-2">
-                                                <button className="bg-red-400 hover:bg-red-600 rounded-full">
+                                                <button onClick={()=>{remove(cart)}} className="bg-red-400 hover:bg-red-600 rounded-full">
                                                     <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6" />
                                                     </svg>
@@ -213,12 +259,7 @@ function CreateOrder() {
                                 <label className=" text-right pe-20 mt-2">{totalPrice}</label>
                             </div>
                             <div className="text-right p-2 pe-10 pt-4">
-                                <button onClick={() => {
-                                    console.log(cartList);
-                                    console.log(order);
-                                    console.log(stockDtos);
-                                    
-                                }} className="bg-gradient-to-r from-purple-600 to-violet-400 hover:bg-gradient-to-l p-2 rounded-full">Submiit Order</button>
+                                <button onClick={() => {submitOrder(); }} className="bg-gradient-to-r from-purple-600 to-violet-400 hover:bg-gradient-to-l p-2 rounded-full">Submiit Order</button>
                             </div>
                         </div>
                     </div>
