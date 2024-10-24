@@ -189,7 +189,7 @@ function Stock() {
                                             <td className="px-6 py-4 border-2 border-violet-600">
                                                 {product.description}
                                             </td>
-                                            <td className="pe-4 py-4 text-right  border-violet-600">
+                                            <td className="pe-4 py-4 text-right border-2  border-violet-600">
 
                                                 {qty != 0 && productId == product.id ? (<div className="flex gap-2">
                                                     <input type="text" value={qty} onClick={() => { setProductId(product.id) }} onChange={(e) => { setQty(parseInt(e.target.value)) }} className="mx-2 px-2 rounded-xl text-center w-20 border-2" placeholder="Quantity" />
@@ -238,7 +238,7 @@ function Stock() {
                                                         <td className="px-6 py-4 border-2 border-violet-600">
                                                             {stock.item.description}
                                                         </td>
-                                                        <td className="pe-4 py-4 text-right  border-violet-600">
+                                                        <td className="pe-4 py-4 text-right border-2 border-violet-600">
                                                             {qty != 0 && productId == stock.id ? (
                                                                 <div className="flex gap-2">
                                                                     <input type="text" value={qty} onClick={() => { setProductId(stock.id) }} onChange={(e) => { setQty(parseInt(e.target.value)) }} className="mx-2 px-2 rounded-xl text-center w-20 border-2" placeholder="Quantity" />
@@ -292,7 +292,7 @@ function Stock() {
                                                     <td className="px-6 py-4 border-2 border-violet-600">
                                                         {stock.item.description}
                                                     </td>
-                                                    <td className="pe-4 py-4 text-right  border-violet-600">
+                                                    <td className="pe-4 py-4 text-right border-2 border-violet-600">
                                                         {isUpdating && stockId === stock.id ? (<div className="flex gap-2">
                                                             <input type="text" autoFocus onChange={(e) => { setQty(parseInt(e.target.value)) }} className="mx-2 px-2 rounded-xl text-center w-20 border-2 border-sky-500" placeholder="Quantity" />
                                                             <button type="button" onClick={() => { update(); setIsUpdating(false); }} className="w-20  py-1 bg-gradient-to-r from-purple-700 to-violet-300 md:mt-0 mt-2 rounded-xl border-2 border-yellow-400 text-white font-semibold hover:bg-gradient-to-l  hover:border-black">Update</button>
@@ -335,7 +335,7 @@ function Stock() {
                                                         <td className="px-6 py-4 border-2 border-violet-600">
                                                             {stock.item.description}
                                                         </td>
-                                                        <td className="pe-4 py-4 text-right flex gap-2 border-violet-600">
+                                                        <td className="pe-4 py-4 text-right flex gap-2 border-2 border-violet-600">
                                                             <label className="mx-2 px-2 rounded-xl text-center w-20 border-2 pt-1" >{stock.qoh}</label>
                                                             <button type="button" onClick={()=>{removeFromStockOrder(stock);}} className="w-20  py-1 bg-gradient-to-r from-red-700 to-pink-300 md:mt-0 mt-2 rounded-xl border-2 border-yellow-400 text-white font-semibold hover:bg-gradient-to-l  hover:border-black">Delete</button>
                                                         </td>
@@ -383,7 +383,7 @@ function Stock() {
                                                     <td className="px-6 py-4 border-2 border-violet-600">
                                                         {stock.item.description}
                                                     </td>
-                                                    <td className="pe-4 py-4 text-right  border-violet-600">
+                                                    <td className="pe-4 py-4 text-right border-2 border-violet-600">
                                                         {isUpdating && stockId === stock.id ? (<div className="flex gap-2">
                                                             <input type="text" autoFocus onChange={(e) => { setQty(parseInt(e.target.value)) }} className="mx-2 px-2 rounded-xl text-center w-20 border-2 border-sky-500" placeholder="Quantity" />
                                                             <button type="button" onClick={() => { update(); setIsUpdating(false); }} className="w-20  py-1 bg-gradient-to-r from-purple-700 to-violet-300 md:mt-0 mt-2 rounded-xl border-2 border-yellow-400 text-white font-semibold hover:bg-gradient-to-l  hover:border-black">Update</button>
