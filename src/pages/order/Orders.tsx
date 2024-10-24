@@ -42,16 +42,16 @@ function Orders() {
                     <h2 className=" md:my-5 text-lg border-4 border-lime-400 rounded-md text-violet-800 font-bold">Orders</h2>
                     <div className="md:flex gap-3 ">
                         <div className=" w-full overflow-x-auto shadow-md sm:rounded-lg">
-                            <table className="w-full table-auto border-separate border-spacing-1 border-2 border-violet-600 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 rounded-lg">
+                            <table className="w-full table-fixed border-separate border-spacing-1 border-2 border-violet-600 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 rounded-lg">
                                 <thead className="text-xs  text-gray-700 uppercase  bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                     <tr className="border-2 border-violet-600">
-                                        <th scope="col" className="px-6 py-3 border-2 border-violet-600">
+                                        <th scope="col" className="px-6 py-3 border-2 border-violet-600 pl-20">
                                             Order ID
                                         </th>
-                                        <th scope="col" className="px-6 py-3 border-2 border-violet-600">
+                                        <th scope="col" className="px-6 py-3 border-2 border-violet-600 pl-20">
                                             Order Date Time
                                         </th>
-                                        <th scope="col" className="px-6 py-3 border-2 border-violet-600">
+                                        <th scope="col" className="px-6 py-3 border-2 border-violet-600 pl-20">
                                             Total Price
                                         </th>
                                     </tr>
@@ -60,13 +60,13 @@ function Orders() {
                                     {orders.map(function (order) {
                                         return (
                                             <tr className="bg-white border-2 border-violet-600 rounded-lg">
-                                                <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  border-2 border-violet-600 rounded-lg">
+                                                <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  border-2 border-violet-600 rounded-lg pl-20">
                                                     {order.id}
                                                 </td>
-                                                <td className="px-6 py-4 border-2 border-violet-600 rounded-lg">
+                                                <td className="px-6 py-4 border-2 border-violet-600 rounded-lg pl-20">
                                                     {order.orderDateTime}
                                                 </td>
-                                                <td className="px-6 py-4 border-2 border-violet-600 rounded-lg">
+                                                <td className="px-6 py-4 border-2 border-violet-600 pl-20 rounded-lg">
                                                     {order.orderTotal}
                                                 </td>
                                             </tr>

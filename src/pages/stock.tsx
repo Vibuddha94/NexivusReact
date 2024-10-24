@@ -166,7 +166,7 @@ function Stock() {
                     <div className="w-full md:mt-10 bg-white border-2 border-purple-800 md:m-auto m-2 md:mx-2 p-2 md:px-10 rounded-lg text-center h-auto">
                         <h2 className=" md:my-5 text-lg border-4 border-lime-400 rounded-md text-violet-800 font-bold">Available Products</h2>
                         {newProduct ? (<div className=" w-full overflow-x-auto shadow-md sm:rounded-lg">
-                            <table className="w-full border-separate border-spacing-1 rounded-lg border-2 border-violet-600 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                            <table className="w-full table-fixed border-separate border-spacing-1 rounded-lg border-2 border-violet-600 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                 <thead className="text-xs  text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                     <tr className="border-2 border-violet-600">
                                         <th scope="col" className="px-6 py-3 border-2 border-violet-600">
@@ -175,7 +175,7 @@ function Stock() {
                                         <th scope="col" className="px-6 py-3 border-2 border-violet-600">
                                             Description
                                         </th>
-                                        <th scope="col" className="px-6 py-3 text-center w-48 border-2 border-violet-600">
+                                        <th scope="col" className="px-6 py-3 text-center w-60 border-2 border-violet-600">
                                             Action
                                         </th>
                                     </tr>
@@ -213,7 +213,7 @@ function Stock() {
                         </div>
                         ) : extProduct ?
                             (<div className=" w-full overflow-x-auto shadow-md sm:rounded-lg">
-                                <table className="w-full border-separate border-spacing-1 rounded-lg border-2 border-violet-600 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                <table className="w-full table-fixed border-separate border-spacing-1 rounded-lg border-2 border-violet-600 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                     <thead className="text-xs  text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                         <tr className="border-2 border-violet-600">
                                             <th scope="col" className="px-6 py-3 border-2 border-violet-600">
@@ -222,7 +222,7 @@ function Stock() {
                                             <th scope="col" className="px-6 py-3 border-2 border-violet-600">
                                                 Description
                                             </th>
-                                            <th scope="col" className="px-6 py-3 text-center w-48 border-2 border-violet-600">
+                                            <th scope="col" className="px-6 py-3 text-center w-60 border-2 border-violet-600">
                                                 Action
                                             </th>
                                         </tr>
@@ -269,7 +269,7 @@ function Stock() {
                         {newProduct ? (
                             <div className="">
                                 <div className=" w-full overflow-x-auto shadow-md sm:rounded-lg">
-                                    <table className="w-full border-separate border-spacing-1 rounded-lg border-2 border-violet-600 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                    <table className="w-full table-fixed border-separate border-spacing-1 rounded-lg border-2 border-violet-600 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                         <thead className="text-xs  text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             <tr className="border-2 border-violet-600">
                                                 <th scope="col" className="px-6 py-3 border-2 border-violet-600">
@@ -278,7 +278,7 @@ function Stock() {
                                                 <th scope="col" className="px-6 py-3 border-2 border-violet-600">
                                                     Description
                                                 </th>
-                                                <th scope="col" className="px-6 py-3 text-center w-48 border-2 border-violet-600">
+                                                <th scope="col" className="px-6 py-3 text-center w-60 border-2 border-violet-600">
                                                     Action
                                                 </th>
                                             </tr>
@@ -311,7 +311,7 @@ function Stock() {
                         ) : extProduct ? (
                             <div className="">
                                 <div className=" w-full overflow-x-auto shadow-md sm:rounded-lg">
-                                    <table className="w-full border-separate border-spacing-1 rounded-lg border-2 border-violet-600 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                    <table className="w-full table-fixed border-separate border-spacing-1 rounded-lg border-2 border-violet-600 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                         <thead className="text-xs  text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             <tr className="border-2 border-violet-600">
                                                 <th scope="col" className="px-6 py-3 border-2 border-violet-600">
@@ -320,7 +320,7 @@ function Stock() {
                                                 <th scope="col" className="px-6 py-3 border-2 border-violet-600">
                                                     Description
                                                 </th>
-                                                <th scope="col" className="px-6 py-3 text-center w-48 border-2 border-violet-600">
+                                                <th scope="col" className="px-6 py-3 text-center w-60 border-2 border-violet-600">
                                                     Action
                                                 </th>
                                             </tr>
@@ -360,7 +360,7 @@ function Stock() {
                         ) : (
                             <div className="">
                                 <div className=" w-full overflow-x-auto shadow-md sm:rounded-lg">
-                                    <table className="w-full border-separate border-spacing-1 rounded-lg border-2 border-violet-600 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                    <table className="w-full table-fixed border-separate border-spacing-1 rounded-lg border-2 border-violet-600 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                         <thead className="text-xs  text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             <tr className="border-2 border-violet-600">
                                                 <th scope="col" className="px-6 py-3 border-2 border-violet-600">
@@ -369,7 +369,7 @@ function Stock() {
                                                 <th scope="col" className="px-6 py-3 border-2 border-violet-600">
                                                     Description
                                                 </th>
-                                                <th scope="col" className="px-6 py-3 text-center w-48 border-2 border-violet-600">
+                                                <th scope="col" className="px-6 py-3 text-center w-60 border-2 border-violet-600">
                                                     QOH
                                                 </th>
                                             </tr>
