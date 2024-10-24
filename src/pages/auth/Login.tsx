@@ -46,9 +46,9 @@ function Login() {
                 </div>
             </div>
             <div className="p-40 text-center">
-                <div className="max-w-[600px] p-8 shadow-xl rounded-xl mx-auto">
+                <div className="max-w-[600px] p-8 shadow-xl rounded-xl mx-auto bg-white">
                     <div className="text-center">
-                        <h1 className="text-4xl font-extrabold text-blue-400">Login</h1>
+                        <h1 className="text-4xl font-extrabold text-sky-600">Login</h1>
                     </div>
                     <form onSubmit={submit} className="max-w-sm mx-auto">
                         <div className="mb-5">
@@ -66,7 +66,7 @@ function Login() {
                             }} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Password" />
                         </div>
                         <div className="text-left">{error && <div className="pb-5 text-red-500 text-sm" >{error}</div>}</div>
-                        <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login</button>
+                        <button type="submit" className="bg-gradient-to-r from-sky-800 to-sky-400 text-white hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-md w-full sm:w-auto px-5 py-2.5 text-center ">Login</button>
                     </form>
                 </div>
             </div>
