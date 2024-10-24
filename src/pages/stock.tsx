@@ -166,16 +166,16 @@ function Stock() {
                     <div className="w-full md:mt-10 bg-white border-2 border-purple-800 md:m-auto m-2 md:mx-2 p-2 md:px-10 rounded-lg text-center h-auto">
                         <h2 className=" md:my-5 text-lg border-4 border-lime-400 rounded-md text-violet-800 font-bold">Available Products</h2>
                         {newProduct ? (<div className=" w-full overflow-x-auto shadow-md sm:rounded-lg">
-                            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                            <table className="w-full border-separate border-spacing-1 rounded-lg border-2 border-violet-600 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                 <thead className="text-xs  text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                     <tr className="border-2 border-violet-600">
-                                        <th scope="col" className="px-6 py-3">
+                                        <th scope="col" className="px-6 py-3 border-2 border-violet-600">
                                             Product Name
                                         </th>
-                                        <th scope="col" className="px-6 py-3">
+                                        <th scope="col" className="px-6 py-3 border-2 border-violet-600">
                                             Description
                                         </th>
-                                        <th scope="col" className="px-6 py-3 text-center w-48">
+                                        <th scope="col" className="px-6 py-3 text-center w-48 border-2 border-violet-600">
                                             Action
                                         </th>
                                     </tr>
@@ -183,13 +183,13 @@ function Stock() {
                                 <tbody>
                                     {newProducts.map(function (product) {
                                         return (<tr className="bg-white border-2 border-white border-2 border-violet-600">
-                                            <td scope="row" className="px-6 py-4 font-medium text-lgtext-gray-900 whitespace-nowrap  border-2 border-violet-600">
+                                            <td scope="row" className="px-6 py-4 font-medium text-lgtext-gray-900 whitespace-nowrap  border-2 border-violet-600 rounded-lg">
                                                 {product.name}
                                             </td>
-                                            <td className="px-6 py-4 border-2 border-violet-600">
+                                            <td className="px-6 py-4 border-2 border-violet-600 rounded-lg">
                                                 {product.description}
                                             </td>
-                                            <td className="pe-4 py-4 text-right border-2  border-violet-600">
+                                            <td className="pe-4 py-4 text-right border-2  border-violet-600 rounded-lg">
 
                                                 {qty != 0 && productId == product.id ? (<div className="flex gap-2">
                                                     <input type="text" value={qty} onClick={() => { setProductId(product.id) }} onChange={(e) => { setQty(parseInt(e.target.value)) }} className="mx-2 px-2 rounded-xl text-center w-20 border-2" placeholder="Quantity" />
@@ -213,16 +213,16 @@ function Stock() {
                         </div>
                         ) : extProduct ?
                             (<div className=" w-full overflow-x-auto shadow-md sm:rounded-lg">
-                                <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                <table className="w-full border-separate border-spacing-1 rounded-lg border-2 border-violet-600 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                     <thead className="text-xs  text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                         <tr className="border-2 border-violet-600">
-                                            <th scope="col" className="px-6 py-3">
+                                            <th scope="col" className="px-6 py-3 border-2 border-violet-600">
                                                 Product Name
                                             </th>
-                                            <th scope="col" className="px-6 py-3">
+                                            <th scope="col" className="px-6 py-3 border-2 border-violet-600">
                                                 Description
                                             </th>
-                                            <th scope="col" className="px-6 py-3 text-center w-48">
+                                            <th scope="col" className="px-6 py-3 text-center w-48 border-2 border-violet-600">
                                                 Action
                                             </th>
                                         </tr>
@@ -232,13 +232,13 @@ function Stock() {
                                             if (!stockOrder.some(stocko => stocko.id === stock.id)) {
                                                 return (
                                                     <tr className="bg-white border-2 border-white border-2 border-violet-600">
-                                                        <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  border-2 border-violet-600">
+                                                        <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  border-2 border-violet-600 rounded-lg">
                                                             {stock.item.name}
                                                         </td>
-                                                        <td className="px-6 py-4 border-2 border-violet-600">
+                                                        <td className="px-6 py-4 border-2 border-violet-600 rounded-lg">
                                                             {stock.item.description}
                                                         </td>
-                                                        <td className="pe-4 py-4 text-right border-2 border-violet-600">
+                                                        <td className="pe-4 py-4 text-right border-2 border-violet-600 rounded-lg">
                                                             {qty != 0 && productId == stock.id ? (
                                                                 <div className="flex gap-2">
                                                                     <input type="text" value={qty} onClick={() => { setProductId(stock.id) }} onChange={(e) => { setQty(parseInt(e.target.value)) }} className="mx-2 px-2 rounded-xl text-center w-20 border-2" placeholder="Quantity" />
@@ -269,16 +269,16 @@ function Stock() {
                         {newProduct ? (
                             <div className="">
                                 <div className=" w-full overflow-x-auto shadow-md sm:rounded-lg">
-                                    <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                    <table className="w-full border-separate border-spacing-1 rounded-lg border-2 border-violet-600 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                         <thead className="text-xs  text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             <tr className="border-2 border-violet-600">
-                                                <th scope="col" className="px-6 py-3">
+                                                <th scope="col" className="px-6 py-3 border-2 border-violet-600">
                                                     Product Name
                                                 </th>
-                                                <th scope="col" className="px-6 py-3">
+                                                <th scope="col" className="px-6 py-3 border-2 border-violet-600">
                                                     Description
                                                 </th>
-                                                <th scope="col" className="px-6 py-3 text-center w-48">
+                                                <th scope="col" className="px-6 py-3 text-center w-48 border-2 border-violet-600">
                                                     Action
                                                 </th>
                                             </tr>
@@ -286,13 +286,13 @@ function Stock() {
                                         <tbody>
                                             {stockAvailable.map(function (stock) {
                                                 return (<tr className="bg-white border-2 border-white border-2 border-violet-600">
-                                                    <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  border-2 border-violet-600">
+                                                    <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  border-2 border-violet-600 rounded-lg">
                                                         {stock.item.name}
                                                     </td>
-                                                    <td className="px-6 py-4 border-2 border-violet-600">
+                                                    <td className="px-6 py-4 border-2 border-violet-600 rounded-lg">
                                                         {stock.item.description}
                                                     </td>
-                                                    <td className="pe-4 py-4 text-right border-2 border-violet-600">
+                                                    <td className="pe-4 py-4 text-right border-2 border-violet-600 rounded-lg">
                                                         {isUpdating && stockId === stock.id ? (<div className="flex gap-2">
                                                             <input type="text" autoFocus onChange={(e) => { setQty(parseInt(e.target.value)) }} className="mx-2 px-2 rounded-xl text-center w-20 border-2 border-sky-500" placeholder="Quantity" />
                                                             <button type="button" onClick={() => { update(); setIsUpdating(false); }} className="w-20  py-1 bg-gradient-to-r from-purple-700 to-violet-300 md:mt-0 mt-2 rounded-xl border-2 border-yellow-400 text-white font-semibold hover:bg-gradient-to-l  hover:border-black">Update</button>
@@ -311,16 +311,16 @@ function Stock() {
                         ) : extProduct ? (
                             <div className="">
                                 <div className=" w-full overflow-x-auto shadow-md sm:rounded-lg">
-                                    <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                    <table className="w-full border-separate border-spacing-1 rounded-lg border-2 border-violet-600 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                         <thead className="text-xs  text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             <tr className="border-2 border-violet-600">
-                                                <th scope="col" className="px-6 py-3">
+                                                <th scope="col" className="px-6 py-3 border-2 border-violet-600">
                                                     Product Name
                                                 </th>
-                                                <th scope="col" className="px-6 py-3">
+                                                <th scope="col" className="px-6 py-3 border-2 border-violet-600">
                                                     Description
                                                 </th>
-                                                <th scope="col" className="px-6 py-3 text-center w-48">
+                                                <th scope="col" className="px-6 py-3 text-center w-48 border-2 border-violet-600">
                                                     Action
                                                 </th>
                                             </tr>
@@ -329,13 +329,13 @@ function Stock() {
                                             {stockOrder.map(function (stock) {
                                                 return (
                                                     <tr className="bg-white border-2 border-white border-2 border-violet-600">
-                                                        <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  border-2 border-violet-600">
+                                                        <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  border-2 border-violet-600 rounded-lg">
                                                             {stock.item.name}
                                                         </td>
-                                                        <td className="px-6 py-4 border-2 border-violet-600">
+                                                        <td className="px-6 py-4 border-2 border-violet-600 rounded-lg">
                                                             {stock.item.description}
                                                         </td>
-                                                        <td className="pe-4 py-4 text-right flex gap-2 border-2 border-violet-600">
+                                                        <td className="pe-4 py-4 text-right flex gap-2 border-2 border-violet-600 rounded-lg">
                                                             <label className="mx-2 px-2 rounded-xl text-center w-20 border-2 pt-1" >{stock.qoh}</label>
                                                             <button type="button" onClick={()=>{removeFromStockOrder(stock);}} className="w-20  py-1 bg-gradient-to-r from-red-700 to-pink-300 md:mt-0 mt-2 rounded-xl border-2 border-yellow-400 text-white font-semibold hover:bg-gradient-to-l  hover:border-black">Delete</button>
                                                         </td>
@@ -360,16 +360,16 @@ function Stock() {
                         ) : (
                             <div className="">
                                 <div className=" w-full overflow-x-auto shadow-md sm:rounded-lg">
-                                    <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                    <table className="w-full border-separate border-spacing-1 rounded-lg border-2 border-violet-600 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                         <thead className="text-xs  text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             <tr className="border-2 border-violet-600">
-                                                <th scope="col" className="px-6 py-3">
+                                                <th scope="col" className="px-6 py-3 border-2 border-violet-600">
                                                     Product Name
                                                 </th>
-                                                <th scope="col" className="px-6 py-3">
+                                                <th scope="col" className="px-6 py-3 border-2 border-violet-600">
                                                     Description
                                                 </th>
-                                                <th scope="col" className="px-6 py-3 text-center w-48">
+                                                <th scope="col" className="px-6 py-3 text-center w-48 border-2 border-violet-600">
                                                     QOH
                                                 </th>
                                             </tr>
@@ -377,13 +377,13 @@ function Stock() {
                                         <tbody>
                                             {stockAvailable.map(function (stock) {
                                                 return (<tr className="bg-white border-2 border-white border-2 border-violet-600">
-                                                    <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  border-2 border-violet-600">
+                                                    <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  border-2 border-violet-600 rounded-lg">
                                                         {stock.item.name}
                                                     </td>
-                                                    <td className="px-6 py-4 border-2 border-violet-600">
+                                                    <td className="px-6 py-4 border-2 border-violet-600 rounded-lg">
                                                         {stock.item.description}
                                                     </td>
-                                                    <td className="pe-4 py-4 text-right border-2 border-violet-600">
+                                                    <td className="pe-4 py-4 text-right border-2 border-violet-600 rounded-lg">
                                                         {isUpdating && stockId === stock.id ? (<div className="flex gap-2">
                                                             <input type="text" autoFocus onChange={(e) => { setQty(parseInt(e.target.value)) }} className="mx-2 px-2 rounded-xl text-center w-20 border-2 border-sky-500" placeholder="Quantity" />
                                                             <button type="button" onClick={() => { update(); setIsUpdating(false); }} className="w-20  py-1 bg-gradient-to-r from-purple-700 to-violet-300 md:mt-0 mt-2 rounded-xl border-2 border-yellow-400 text-white font-semibold hover:bg-gradient-to-l  hover:border-black">Update</button>

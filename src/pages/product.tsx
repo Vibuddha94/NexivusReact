@@ -166,22 +166,22 @@ function Product() {
                         <h2 className=" md:my-5 text-lg border-4 border-lime-400 rounded-md text-violet-800 font-bold">Products</h2>
                         <div className="md:flex gap-3 ">
                             <div className=" w-full overflow-x-auto shadow-md sm:rounded-lg">
-                                <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 rounded-xl">
+                                <table className="w-full border-separate border-spacing-1 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 border-2 border-violet-600 rounded-lg">
                                     <thead className="text-xs  text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                         <tr className="border-2 border-violet-600">
-                                            <th scope="col" className="px-6 py-3">
+                                            <th scope="col" className="px-6 py-3 border-2 border-violet-600">
                                                 Product Name
                                             </th>
-                                            <th scope="col" className="px-6 py-3">
+                                            <th scope="col" className="px-6 py-3 border-2 border-violet-600">
                                                 Description
                                             </th>
-                                            <th scope="col" className="px-6 py-3">
+                                            <th scope="col" className="px-6 py-3 border-2 border-violet-600">
                                                 Category
                                             </th>
-                                            <th scope="col" className="px-6 py-3">
+                                            <th scope="col" className="px-6 py-3 border-2 border-violet-600">
                                                 Price (rs/=)
                                             </th>
-                                            <th scope="col" className="px-6 py-3 text-center w-48">
+                                            <th scope="col" className="px-6 py-3 text-center w-48 border-2 border-violet-600">
                                                 Action
                                             </th>
                                         </tr>
@@ -189,19 +189,19 @@ function Product() {
                                     <tbody>
                                         {products.map(function (product) {
                                             return (<tr className="bg-white border-2 border-violet-600 rounded-lg">
-                                                <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  border-2 border-violet-600">
+                                                <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  border-2 border-violet-600 rounded-lg">
                                                     {product.name}
                                                 </td>
-                                                <td className="px-6 py-4 border-2 border-violet-600">
+                                                <td className="px-6 py-4 border-2 border-violet-600 rounded-lg">
                                                     {product.description}
                                                 </td>
-                                                <td className="px-6 py-4 border-2 border-violet-600">
+                                                <td className="px-6 py-4 border-2 border-violet-600 rounded-lg">
                                                     {product.category.name}
                                                 </td>
-                                                <td className="px-6 py-4 border-2 border-violet-600">
+                                                <td className="px-6 py-4 border-2 border-violet-600 rounded-lg">
                                                     {product.price}
                                                 </td>
-                                                <td className="pe-4 py-4 text-right border-2 border-violet-600">
+                                                <td className="pe-4 py-4 text-right border-2 border-violet-600 rounded-lg">
                                                     <button type="button" onClick={() => getEditProduct(product)} className="w-20 md:me-1 py-1 bg-gradient-to-r from-green-300 via-green-500 to-green-700 hover:bg-gradient-to-br md:mt-0 mt-2 rounded-xl border-2 border-yellow-400 text-white font-semibold hover:border-black">Edit</button>
                                                     <button type="button" onClick={() => deleteProduct(product.id)} className="w-20 py-1 bg-gradient-to-r from-red-800 to-pink-500 md:mt-0 mt-2 rounded-xl border-2 border-yellow-400 text-white font-semibold hover:bg-gradient-to-l  hover:border-black">Delete</button>
                                                 </td>
