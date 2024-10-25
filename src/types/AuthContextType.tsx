@@ -1,8 +1,11 @@
+import AuthResponseType from "./AuthResponseType";
+
 interface AuthContextType {
     isAuthenticated: boolean;
     jwtToken: string | null;
     loading: boolean;
-    login: (jwtToken: string) => void;
+    usertype:string | null;
+    login: (dto: AuthResponseType) => void;
     logout: () => void;
 }
 

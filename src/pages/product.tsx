@@ -4,10 +4,12 @@ import { useAuth } from "../context/AuthContext";
 import CategoryType from "../types/CategoryType";
 import ProductType from "../types/ProductType";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Product() {
 
-    const { isAuthenticated, jwtToken } = useAuth();
+    const { isAuthenticated, jwtToken , usertype} = useAuth();
+    const navigate = useNavigate()
 
     const [categories, setCategories] = useState<CategoryType[]>([]);
     const [products, setProducts] = useState<ProductType[]>([]);
@@ -24,6 +26,17 @@ function Product() {
             Authorization: `Bearer ${jwtToken}`
         }
     }
+
+    useEffect(function () {
+        if (isAuthenticated) {
+            if(usertype?.includes("chashier")) {
+                navigate("/");
+            }
+            getProducts();
+            getCategory();
+        }
+    }, [isAuthenticated])
+
 
     async function getCategory() {
         try {
@@ -64,32 +77,43 @@ function Product() {
 
     async function updateProduct() {
 
-        if (checkEmpty()) {
-            const data = {
-                name: productName,
-                description: productDescription,
-                price: productPrice,
-                categoryId: categoryId
-            }
-            try {
-                const response = await axios.put(`http://localhost:8085/items/${editingProduct?.id}`, data, config);
-                console.log(response.data);
-                getProducts();
-                clear();
-            } catch (error) {
-                console.log(error);
+        if (usertype?.includes("store")) {
+            setError("You are not authorized to edit product");
+            setEditingProduct(null);
+            clear();
+        } else {
+            if (checkEmpty()) {
+                const data = {
+                    name: productName,
+                    description: productDescription,
+                    price: productPrice,
+                    categoryId: categoryId
+                }
+                try {
+                    const response = await axios.put(`http://localhost:8085/items/${editingProduct?.id}`, data, config);
+                    console.log(response.data);
+                    getProducts();
+                    clear();
+                } catch (error) {
+                    console.log(error);
+                }
             }
         }
 
     }
 
     async function deleteProduct(productId: number) {
-        try {
-            await axios.delete(`http://localhost:8085/items/${productId}`, config);
-            getProducts();
-        } catch (error) {
-            console.log(error);
-        }
+        if (usertype?.includes("store")) {
+            setError("You are not authorized to delete product");
+            clear();
+        }else {
+            try {
+                await axios.delete(`http://localhost:8085/items/${productId}`, config);
+                getProducts();
+            } catch (error) {
+                console.log(error);
+            }
+        } 
     }
 
     function clear() {
@@ -100,13 +124,7 @@ function Product() {
         setEditingProduct(null);
     }
 
-    useEffect(function () {
-        if (isAuthenticated) {
-            getProducts();
-            getCategory();
-        }
-    }, [isAuthenticated])
-
+    
     function checkEmpty() {
         if (productName === "" || productDescription === "" || productPrice === 0 || productPrice === 0.0 || categoryId === 0) {
             setError("Fields can't be Empty..");

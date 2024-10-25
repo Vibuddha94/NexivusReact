@@ -3,11 +3,13 @@ import Navbar from "../../components/Navbar";
 import { useAuth } from "../../context/AuthContext";
 import OrderType from "../../types/OrderType";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 function Orders() {
 
-    const { isAuthenticated, jwtToken } = useAuth();
+    const { isAuthenticated, jwtToken, usertype } = useAuth();
+    const navigate = useNavigate()
 
     const [orders, setOrders] = useState<OrderType[]>([]);
     
@@ -20,6 +22,9 @@ function Orders() {
 
     useEffect(function () {
         if (isAuthenticated) {
+            if(usertype?.includes("store") || usertype?.includes("chashier")) {
+                navigate("/");
+            }
             getOrders();
         }
     }, [isAuthenticated])

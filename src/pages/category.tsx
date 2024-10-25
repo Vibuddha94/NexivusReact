@@ -3,9 +3,11 @@ import Navbar from "../components/Navbar";
 import CategoryType from "../types/CategoryType";
 import { useAuth } from "../context/AuthContext";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Category() {
-    const { isAuthenticated, jwtToken } = useAuth();
+    const { isAuthenticated, jwtToken ,usertype} = useAuth();
+    const navigate = useNavigate()
 
     const [categories, setCategories] = useState<CategoryType[]>([]);
     const [catName, setCatName] = useState<string>("");
@@ -19,6 +21,9 @@ function Category() {
 
     useEffect(function () {
         if (isAuthenticated) {
+            if(usertype?.includes("chashier")) {
+                navigate("/");
+            }
             getCategory();
         }
     }, [isAuthenticated])

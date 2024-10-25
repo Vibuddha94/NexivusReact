@@ -9,7 +9,7 @@ import StockDtoType from "../../types/StockDtoType";
 import { useNavigate } from "react-router-dom";
 
 function CreateOrder() {
-    const { isAuthenticated, jwtToken } = useAuth();
+    const { isAuthenticated, jwtToken, usertype} = useAuth();
 
     const navigate = useNavigate()
 
@@ -33,8 +33,11 @@ function CreateOrder() {
 
     useEffect(function () {
         if (isAuthenticated) {
+            if(usertype?.includes("store")) {
+                navigate("/");
+            }
             getProducts();
-            getStocks();
+            getStocks(); 
         }
     }, [isAuthenticated,cartList])
 

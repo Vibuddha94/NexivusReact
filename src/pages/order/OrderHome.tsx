@@ -1,7 +1,21 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar";
+import { useAuth } from "../../context/AuthContext";
+import { useEffect } from "react";
 
 function OrderHome() {
+    const { isAuthenticated, usertype} = useAuth();
+
+    const navigate = useNavigate()
+
+    useEffect(function () {
+        if (isAuthenticated) {
+            if(usertype?.includes("store")) {
+                navigate("/");
+            }
+        }
+    }, [isAuthenticated])
+
     return (
         <div>
             <Navbar page="order" />

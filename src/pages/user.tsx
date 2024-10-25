@@ -3,10 +3,13 @@ import Navbar from "../components/Navbar";
 import { useAuth } from "../context/AuthContext";
 import UserType from "../types/UserType";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function User() {
 
-    const { isAuthenticated, jwtToken } = useAuth();
+    const { isAuthenticated, jwtToken , usertype } = useAuth();
+    const navigate = useNavigate()
+    
     const [users, setUsers] = useState<UserType[]>([]);
     const [fullname, setFullName] = useState<string>("");
     const [username, setUsername] = useState<string>("");
@@ -24,7 +27,12 @@ function User() {
 
     useEffect(function () {
         if (isAuthenticated) {
+            if(usertype?.includes("chashier") || usertype?.includes("store")) {
+                navigate("/");
+            }
             getUsers();
+            console.log(usertype);
+            
         }
     }, [isAuthenticated])
 
@@ -133,13 +141,23 @@ function User() {
                                 <input type="text" value={fullname} onChange={(e) => { setFullName(e.target.value); setError(""); }} className="bg-white w-full mt-2 md:mt-0 rounded-lg text-sm p-2 ring-2 " placeholder="Enter Full NAme" required />
                                 <input type="text" value={username} onChange={(e) => { setUsername(e.target.value); setError(""); }} className="bg-white w-full mt-2 md:mt-0 rounded-lg text-sm p-2 ring-2 " placeholder="Enter Username" required />
                                 <input type="text" value={password} onChange={(e) => { setPassword(e.target.value); setError(""); }} className="bg-white w-full mt-2 md:mt-0 rounded-lg text-sm p-2 ring-2 " placeholder="Enter Password" required />
-                                <select onChange={(e) => { setUserType(e.target.value); setError(""); }} className="bg-white w-full mt-2 md:mt-0 rounded-lg text-sm p-2 ring-2" value={userType} required>
+                                {usertype?.includes("admin") ? (
+                                    <select onChange={(e) => { setUserType(e.target.value); setError(""); }} className="bg-white w-full mt-2 md:mt-0 rounded-lg text-sm p-2 ring-2" value={userType} required>
                                     <option value="">Select User Type</option>
                                     <option value="admin">Admin</option>
                                     <option value="manager">Manager</option>
                                     <option value="store">Store Keeper</option>
                                     <option value="chashier">Cashier</option>
                                 </select>
+                                ) : (
+                                    <select onChange={(e) => { setUserType(e.target.value); setError(""); }} className="bg-white w-full mt-2 md:mt-0 rounded-lg text-sm p-2 ring-2" value={userType} required>
+                                    <option value="">Select User Type</option>
+                                    <option value="manager">Manager</option>
+                                    <option value="store">Store Keeper</option>
+                                    <option value="chashier">Cashier</option>
+                                </select>
+                                )}
+                                
                             </form>
                             {isEditing ? (
                                 <button type="button" onClick={() => {

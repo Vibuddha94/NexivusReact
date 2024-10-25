@@ -5,11 +5,13 @@ import ProductType from "../types/ProductType";
 import StockType from "../types/StockType";
 import axios from "axios";
 import StockDtoType from "../types/StockDtoType";
+import { useNavigate } from "react-router-dom";
 
 
 function Stock() {
 
-    const { isAuthenticated, jwtToken } = useAuth();
+    const { isAuthenticated, jwtToken, usertype } = useAuth();
+    const navigate = useNavigate()
 
     const [newProduct, setNewProduct] = useState<boolean>(false);
     const [extProduct, setExtProduct] = useState<boolean>(false);
@@ -22,6 +24,7 @@ function Stock() {
     const [newProducts, setNewProducts] = useState<ProductType[]>([]);
     const [stockOrder, setStockOrder] = useState<StockType[]>([]);
     const [stockDtos, setStockDtos] = useState<StockDtoType[]>([]);
+    const [Error, setError] = useState<string>("");
 
     const config = {
         headers: {
@@ -31,6 +34,9 @@ function Stock() {
 
     useEffect(function () {
         if (isAuthenticated) {
+            if(usertype?.includes("chashier")) {
+                navigate("/");
+            }
             getStockAvailable();
             getProducts();
             setNewProducts(filterNewProducts());
@@ -87,19 +93,27 @@ function Stock() {
     }
 
     async function update() {
-        const data = {
-            id: stockId,
-            qty: qty
-        }
-
-        try {
-            const resonse = await axios.put("http://localhost:8085/stock", data, config);
-            console.log(resonse.data);
-            getStockAvailable();
+        if (usertype?.includes("admin")) {
+            const data = {
+                id: stockId,
+                qty: qty
+            }
+    
+            try {
+                const resonse = await axios.put("http://localhost:8085/stock", data, config);
+                console.log(resonse.data);
+                getStockAvailable();
+                setQty(0);
+            } catch (error) {
+                console.log(error);
+            }
+        } else {
+            setError("You are not authorized to update stock");
             setQty(0);
-        } catch (error) {
-            console.log(error);
-        }
+            setIsUpdating(false);
+            setProductId(0);
+           
+        } 
     }
 
     async function addToStock() {
@@ -191,13 +205,13 @@ function Stock() {
                                             <td className="pe-4 py-4 text-right border-2  border-violet-600 rounded-lg">
 
                                                 {qty != 0 && productId == product.id ? (<div className="flex gap-2">
-                                                    <input type="text" value={qty} onClick={() => { setProductId(product.id) }} onChange={(e) => { setQty(parseInt(e.target.value)) }} className="mx-2 px-2 rounded-xl text-center w-20 border-2" placeholder="Quantity" />
-                                                    <button type="button" onClick={() => { createStock(); }} className="w-20  py-1 bg-gradient-to-r from-green-700 to-lime-300 md:mt-0 mt-2 rounded-xl border-2 border-yellow-400 text-white font-semibold hover:bg-gradient-to-l  hover:border-black">ADD</button>
+                                                    <input type="text" value={qty} onClick={() => { setProductId(product.id);setError(""); }} onChange={(e) => { setQty(parseInt(e.target.value)) }} className="mx-2 px-2 rounded-xl text-center w-20 border-2" placeholder="Quantity" />
+                                                    <button type="button" onClick={() => { createStock(); setError(""); }} className="w-20  py-1 bg-gradient-to-r from-green-700 to-lime-300 md:mt-0 mt-2 rounded-xl border-2 border-yellow-400 text-white font-semibold hover:bg-gradient-to-l  hover:border-black">ADD</button>
                                                 </div>
 
                                                 ) : (
                                                     <div className="flex gap-2">
-                                                        <input type="text" value={0} onClick={() => { setProductId(product.id) }} onChange={(e) => { setQty(parseInt(e.target.value)) }} className="mx-2 px-2 rounded-xl text-center w-20 border-2" placeholder="Quantity" />
+                                                        <input type="text" value={0} onClick={() => { setProductId(product.id);setError(""); }} onChange={(e) => { setQty(parseInt(e.target.value)) }} className="mx-2 px-2 rounded-xl text-center w-20 border-2" placeholder="Quantity" />
                                                         <button type="submit" className="w-20  py-1 bg-gradient-to-r from-green-700 to-lime-300 md:mt-0 mt-2 rounded-xl border-2 border-yellow-400 text-white font-semibold hover:bg-gradient-to-l  hover:border-black">ADD</button>
                                                     </div>
 
@@ -245,7 +259,7 @@ function Stock() {
                                                                 </div>
                                                             ) : (
                                                                 <div className="flex gap-2">
-                                                                    <input type="text" value={0} onClick={() => { setProductId(stock.id) }} onChange={(e) => { setQty(parseInt(e.target.value)) }} className="mx-2 px-2 rounded-xl text-center w-20 border-2" placeholder="Quantity" />
+                                                                    <input type="text" value={0} onClick={() => { setProductId(stock.id); }} onChange={(e) => { setQty(parseInt(e.target.value)) }} className="mx-2 px-2 rounded-xl text-center w-20 border-2" placeholder="Quantity" />
                                                                     <button type="button" className="w-20  py-1 bg-gradient-to-r from-green-700 to-lime-300 md:mt-0 mt-2 rounded-xl border-2 border-yellow-400 text-white font-semibold hover:bg-gradient-to-l  hover:border-black">ADD</button>
                                                                 </div>
                                                             )}
@@ -257,9 +271,11 @@ function Stock() {
                                 </table>
                             </div>) :
                             (<div className="grid md:grid-cols-2 gap-3 pb-5 pt-2 md:item-center">
-                                <button type="button" onClick={() => { setNewProduct(true); setExtProduct(false); filterNewProducts(); setNewProducts(filterNewProducts()); }} className="s:me-4 md:mb-0 mb-2 px-6 py-3.5 text-base font-medium text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">New Products</button>
-                                <button type="button" onClick={() => { setExtProduct(true); setNewProduct(false); }} className="px-6 py-3.5 text-base font-medium text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Existing Products</button>
-                            </div>)}
+                                <button type="button" onClick={() => { setNewProduct(true); setExtProduct(false); filterNewProducts(); setNewProducts(filterNewProducts());setError("");}} className="s:me-4 md:mb-0 mb-2 px-6 py-3.5 text-base font-medium text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">New Products</button>
+                                <button type="button" onClick={() => { setExtProduct(true); setNewProduct(false); setError("");}} className="px-6 py-3.5 text-base font-medium text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Existing Products</button>
+                            </div> 
+                        )}
+                        <div className="text-sm text-red-600">{Error}</div>
                     </div>
                     {/* bottom division */}
                     <div className="w-full  bg-white border-2 border-purple-800  m-2 md:mx-2 p-2 md:px-10 rounded-lg text-center">
