@@ -80,14 +80,40 @@ function User() {
         }
     }
 
-    async function deleteUser(userID: number) {
-        try {
-            await axios.delete(`http://localhost:8085/users/${userID}`, config);
-            getUsers();
-            clear();
-        } catch (error) {
-            console.log(error);
+    async function deleteUser(user: UserType) {
+
+        if (user.userType.includes("admin") && usertype?.includes("manager")) {
+            setError("You are not authorized to delete admin user.");
+        } else if(user.userType.includes("admin") && usertype?.includes("admin")) {
+            let count = 0;
+            for(let i=0; i<users.length; i++){
+                if(users[i].userType.includes("admin")) {
+                    count++;
+                }
+            }
+
+            if(count > 1){
+                try {
+                    await axios.delete(`http://localhost:8085/users/${user.id}`, config);
+                    getUsers();
+                    clear();
+                } catch (error) {
+                    console.log(error);
+                }
+            } else {
+                setError("Can't delete the last admin user in the system")
+            }
+        } else {
+            try {
+                await axios.delete(`http://localhost:8085/users/${user.id}`, config);
+                getUsers();
+                clear();
+            } catch (error) {
+                console.log(error);
+            }
         }
+
+        
     }
 
 
@@ -228,8 +254,8 @@ function User() {
                                                     {user.userType}
                                                 </td>
                                                 <td className="pe-4 py-4 text-right border-2 border-violet-600 rounded-lg">
-                                                    <button type="button" onClick={()=>{updatingUser(user)}} className="w-20 md:me-1 py-1 bg-gradient-to-r from-green-600  to-lime-400 hover:bg-gradient-to-l md:mt-0 mt-2 rounded-xl border-2 border-yellow-400 text-white font-semibold hover:border-black">Edit</button>
-                                                    <button type="button" onClick={()=>{deleteUser(user.id)}} className="w-20 py-1 bg-gradient-to-r from-red-600 to-pink-500 md:mt-0 mt-2 rounded-xl border-2 border-yellow-400 text-white font-semibold hover:bg-gradient-to-l  hover:border-black">Delete</button>
+                                                    <button type="button" onClick={()=>{setError("");updatingUser(user)}} className="w-20 md:me-1 py-1 bg-gradient-to-r from-green-600  to-lime-400 hover:bg-gradient-to-l md:mt-0 mt-2 rounded-xl border-2 border-yellow-400 text-white font-semibold hover:border-black">Edit</button>
+                                                    <button type="button" onClick={()=>{setError("");deleteUser(user)}} className="w-20 py-1 bg-gradient-to-r from-red-600 to-pink-500 md:mt-0 mt-2 rounded-xl border-2 border-yellow-400 text-white font-semibold hover:bg-gradient-to-l  hover:border-black">Delete</button>
                                                 </td>
                                             </tr>)
                                         })}
