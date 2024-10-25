@@ -103,8 +103,7 @@ function Stock() {
     }
 
     async function addToStock() {
-        const data =
-            stockDtos
+        const data = stockDtos
 
         try {
             const resonse = await axios.put("http://localhost:8085/stock/addto", data, config);
@@ -135,25 +134,25 @@ function Stock() {
 
     function addToStockOrder(stock: StockType) {
         stock.qoh = qty;
-        let stocks = [...stockOrder, stock];
-        setStockOrder(stocks);
+        stockOrder.push(stock);
 
         const stockDto: StockDtoType = {
             id: stock.id,
             qty: stock.qoh
         }
 
-        let dtos = [...stockDtos, stockDto];
-        setStockDtos(dtos);
+        stockDtos.push(stockDto);
     }
 
     function removeFromStockOrder(stock: StockType) {
         stockOrder.splice(stockOrder.indexOf(stock), 1);
-        const stockDto: StockDtoType = {
-            id: stock.id,
-            qty: stock.qoh
+        
+        for(let i=0; i<stockDtos.length; i++){
+            if(stockDtos[i].id == stock.id){
+                stockDtos.splice(i, 1);
+            }
         }
-        stockDtos.splice(stockDtos.indexOf(stockDto), 1);
+
         getStockAvailable();
     }
 
@@ -242,7 +241,7 @@ function Stock() {
                                                             {qty != 0 && productId == stock.id ? (
                                                                 <div className="flex gap-2">
                                                                     <input type="text" value={qty} onClick={() => { setProductId(stock.id) }} onChange={(e) => { setQty(parseInt(e.target.value)) }} className="mx-2 px-2 rounded-xl text-center w-20 border-2" placeholder="Quantity" />
-                                                                    <button type="button" onClick={() => { addToStockOrder(stock); setQty(0); setProductId(0); }} className="w-20  py-1 bg-gradient-to-r from-green-700 to-lime-300 md:mt-0 mt-2 rounded-xl border-2 border-yellow-400 text-white font-semibold hover:bg-gradient-to-l  hover:border-black">ADD</button>
+                                                                    <button type="button" onClick={() => { addToStockOrder(stock); setQty(0); setProductId(0);}} className="w-20  py-1 bg-gradient-to-r from-green-700 to-lime-300 md:mt-0 mt-2 rounded-xl border-2 border-yellow-400 text-white font-semibold hover:bg-gradient-to-l  hover:border-black">ADD</button>
                                                                 </div>
                                                             ) : (
                                                                 <div className="flex gap-2">
@@ -350,9 +349,7 @@ function Stock() {
                                             <button type="button" className="w-full md:me-1 py-1 bg-gradient-to-r from-green-300 via-green-500 to-green-700 hover:bg-gradient-to-br md:mt-0 mt-2 rounded-xl border-2 border-yellow-400 text-white font-semibold  hover:border-black">Add To Stock</button>
                                         ) :
                                         (
-                                            <button type="button" onClick={() => {
-                                                console.log(stockDtos,stockOrder); addToStock();
-                                            }} className="w-full md:me-1 py-1 bg-gradient-to-r from-green-300 via-green-500 to-green-700 hover:bg-gradient-to-br md:mt-0 mt-2 rounded-xl border-2 border-yellow-400 text-white font-semibold  hover:border-black">Add To Stock</button>
+                                            <button type="button" onClick={() => {addToStock();setNewProduct(false);setExtProduct(false);}} className="w-full md:me-1 py-1 bg-gradient-to-r from-green-300 via-green-500 to-green-700 hover:bg-gradient-to-br md:mt-0 mt-2 rounded-xl border-2 border-yellow-400 text-white font-semibold  hover:border-black">Add To Stock</button>
                                         )}
 
                                 </div>

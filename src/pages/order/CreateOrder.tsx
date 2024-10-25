@@ -2,13 +2,16 @@ import { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 import { useAuth } from "../../context/AuthContext";
 import ProductType from "../../types/ProductType";
-import axios, { Axios } from "axios";
+import axios from "axios";
 import StockType from "../../types/StockType";
 import CartType from "../../types/CartType";
 import StockDtoType from "../../types/StockDtoType";
+import { useNavigate } from "react-router-dom";
 
 function CreateOrder() {
     const { isAuthenticated, jwtToken } = useAuth();
+
+    const navigate = useNavigate()
 
     const [products, setProducts] = useState<ProductType[]>([]);
     const [stocks, setStocks] = useState<StockType[]>([]);
@@ -83,6 +86,8 @@ function CreateOrder() {
         setCartList([]);
         setIsCartOpen(false);
         getStocks();
+        getProducts();
+        navigate("/order");
     }
 
 
@@ -114,7 +119,6 @@ function CreateOrder() {
             }
             stockDtos.push(stockDto);
         }
-        
         setQty(0);
         setProductId(0);
     }
@@ -122,14 +126,12 @@ function CreateOrder() {
     function remove(cart: CartType) {
         order.splice(order.indexOf(cart.itemId), cart.qty);
         cartList.splice(cartList.indexOf(cart), 1);
-
-        const stockDto : StockDtoType = {
-            id : cart.stockId,
-            qty: cart.qty,
+        
+        for(let i=0; i<stockDtos.length; i++){
+            if(stockDtos[i].id == cart.stockId){
+                stockDtos.splice(i, 1);
+            }
         }
-
-        stockDtos.splice(stockDtos.indexOf(stockDto), 1);
-
         setTotalPrice(totalPrice - cart.price);
     }
 
@@ -325,12 +327,7 @@ function CreateOrder() {
                         })}
                     </div>
                 </div>
-
             )}
-
-
-
-
         </div>
 
     )
