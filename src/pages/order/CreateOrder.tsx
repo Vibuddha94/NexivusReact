@@ -192,7 +192,7 @@ function CreateOrder() {
                             <label className=" text-left pl-5 font-bold mt-2">Paid Amount</label>
                             {collectingCash ? (
                                 <div className="flex flex-row-reverse">
-                                    <input onChange={(e) => { setCashAmount(parseInt(e.target.value)) }} className="shadow-md rounded-lg text-center w-max m-2" type="text" placeholder="Cash Amount" />
+                                    <input autoFocus onChange={(e) => { setCashAmount(parseInt(e.target.value)) }} className="shadow-md rounded-lg text-center w-max m-2" type="text" placeholder="Cash Amount" />
                                 </div>
                             ) :
                                 (<label onClick={() => { setCollectingCash(true) }} className=" text-right pe-20 mt-2">{cashAmount}</label>)}
