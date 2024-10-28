@@ -10,6 +10,7 @@ import User from './pages/User'
 import Login from './pages/auth/Login'
 import { AuthProvider } from './context/AuthContext'
 import ProtectedRoute from './components/ProtectedRoute'
+import Temp from './pages/temp'
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
           <Route path='/order/createorder' element={<CreateOrder />} />
           <Route path='/stock' element={<Stock />} />
           <Route path='/user' element={<User />} />
+          <Route path='/temp' element={<Temp />} />
           </Route>
           <Route path='/auth/login' element={<Login />} />
         </Routes>
